@@ -204,3 +204,110 @@ c<html lang="es">
     </div>
   </details>
 </div>
+<!-- Estilos CSS para las Pestañas -->
+<style>
+  .contenedor-pestanas {
+    max-width: 800px;
+    margin: 30px auto;
+    font-family: sans-serif;
+  }
+
+  /* Botones superiores */
+  .lista-pestanas {
+    display: flex;
+    gap: 10px;
+    border-bottom: 2px solid #e1e8ed;
+    margin-bottom: 20px;
+  }
+
+  .boton-tab {
+    padding: 10px 20px;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #657786;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .boton-tab:hover {
+    color: #4a90e2;
+  }
+
+  /* Estilo del botón activo/seleccionado */
+  .boton-tab.activo {
+    color: #4a90e2;
+    border-bottom-color: #4a90e2;
+  }
+
+  /* Contenido de cada pestaña */
+  .contenido-tab {
+    display: none; /* Oculto por defecto */
+    padding: 10px;
+    animation: fadeIn 0.4s ease;
+  }
+
+  /* La pestaña con la clase "activo" sí se muestra */
+  .contenido-tab.activo {
+    display: block;
+  }
+
+  /* Animación suave al cambiar de pestaña */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+
+<!-- Estructura HTML de las Pestañas -->
+<div class="contenedor-pestanas">
+  
+  <!-- 1. Menú de Botones -->
+  <div class="lista-pestanas">
+    <button class="boton-tab activo" onclick="abrirPestana(event, 'inicio')">Inicio</button>
+    <button class="boton-tab" onclick="abrirPestana(event, 'historia')">Historia</button>
+    <button class="boton-tab" onclick="abrirPestana(event, 'fotos')">Fotos</button>
+  </div>
+
+  <!-- 2. Contenido de la Pestaña 1 (Inicio) -->
+  <div id="inicio" class="contenido-tab activo">
+    <h2>Bienvenido a mi sitio web</h2>
+    <p>Esta es la página principal. Aquí puedes poner tu presentación general o bienvenida.</p>
+  </div>
+
+  <!-- 3. Contenido de la Pestaña 2 (Historia) -->
+  <div id="historia" class="contenido-tab">
+    <h2>Mi Historia</h2>
+    <p>Aquí puedes escribir tu texto largo o relato sin que ocupe espacio en la portada principal.</p>
+  </div>
+
+  <!-- 4. Contenido de la Pestaña 3 (Fotos) -->
+  <div id="fotos" class="contenido-tab">
+    <h2>Álbum de Fotos</h2>
+    <div class="album-fotos">
+      <img src="fam1.jpeg" class="foto-album" alt="Foto 1">
+      <img src="fam2.jpeg" class="foto-album" alt="Foto 2">
+      <img src="fam3.jpeg" class="foto-album" alt="Foto 3">
+    </div>
+  </div>
+
+</div>
+
+<!-- Código JavaScript para alternar entre pestañas -->
+<script>
+  function abrirPestana(evento, nombrePestana) {
+    // 1. Ocultar todos los contenidos de las pestañas
+    const contenidos = document.querySelectorAll('.contenido-tab');
+    contenidos.forEach(contenido => contenido.classList.remove('activo'));
+
+    // 2. Desactivar el estilo de todos los botones
+    const botones = document.querySelectorAll('.boton-tab');
+    botones.forEach(boton => boton.classList.remove('activo'));
+
+    // 3. Mostrar la pestaña actual y activar el botón presionado
+    document.getElementById(nombrePestana).classList.add('activo');
+    evento.currentTarget.classList.add('activo');
+  }
+</script>
